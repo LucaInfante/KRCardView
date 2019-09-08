@@ -17,13 +17,12 @@ public protocol KRCardView {
 
   var cardHandleAreaHeight: CGFloat { get }
   var cardHeight: CGFloat { get }
-  var carHandle = false
 
 }
 
 extension KRCardView where Self: UIViewController {
 
-  public func addKRCardView() {
+  public func addKRCardView(handle: Bool) {
 
     // Visual Effect View
     cardViewController.visualEffectView.frame = self.view.frame
@@ -36,7 +35,7 @@ extension KRCardView where Self: UIViewController {
 
     cardViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: self.cardHeight)
 
-    if self.carHandle
+    if handle
     {
       let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGesture(recognizer:)))
       let panGestureRecongnizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(recognizer:)))
