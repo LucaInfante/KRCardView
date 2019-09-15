@@ -10,7 +10,7 @@ import UIKit
 
 open class CardViewController: UIViewController {
 
-  var handleArea: UIView!
+  var handleArea: UIView?
 
   var visualEffectView = UIVisualEffectView()
 
