@@ -41,11 +41,11 @@ extension KRCardView where Self: UIViewController {
       let panGestureRecongnizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(recognizer:)))
 
       cardViewController.handleArea = UIView(frame: CGRect(x: 10, y: 10, width: 100, height: 20))
-      cardViewController.handleArea.backgroundColor = UIColor.black
-      cardViewController.view.addSubview(cardViewController.handleArea)
+      cardViewController.handleArea!.backgroundColor = UIColor.black
+      cardViewController.view.addSubview(cardViewController.handleArea!)
       
-      cardViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
-      cardViewController.handleArea.addGestureRecognizer(panGestureRecongnizer)
+      cardViewController.handleArea!.addGestureRecognizer(tapGestureRecognizer)
+      cardViewController.handleArea!.addGestureRecognizer(panGestureRecongnizer)
     }
     
     cardViewController.view.clipsToBounds = true
@@ -83,7 +83,7 @@ fileprivate extension UIViewController {
       self.startInteractiveTransition(state: nextState, duration: 0.9)
     case .changed:
 
-      let transition = recognizer.translation(in: bottomView.cardViewController.handleArea)
+      let transition = recognizer.translation(in: bottomView.cardViewController.handleArea!)
       var fractionComplete = transition.y / bottomView.cardHeight
       fractionComplete = bottomView.cardViewController.cardVisible ? fractionComplete : -fractionComplete
 
