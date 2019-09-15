@@ -14,7 +14,6 @@ public enum CardState: Int {
 
 public protocol KRCardView {
   var cardViewController: CardViewController! { get set }
-  var cardHandle: UIView! { get set}
 
   var cardHandleAreaHeight: CGFloat { get }
   var cardHeight: CGFloat { get }
@@ -41,9 +40,8 @@ extension KRCardView where Self: UIViewController {
       let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGesture(recognizer:)))
       let panGestureRecongnizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(recognizer:)))
 
-      cardViewController.handleArea = self.cardHandle
-      cardViewController.handleArea!.addGestureRecognizer(tapGestureRecognizer)
-      cardViewController.handleArea!.addGestureRecognizer(panGestureRecongnizer)
+      cardViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
+      cardViewController.handleArea.addGestureRecognizer(panGestureRecongnizer)
     }
     
     cardViewController.view.clipsToBounds = true
@@ -81,7 +79,7 @@ fileprivate extension UIViewController {
       self.startInteractiveTransition(state: nextState, duration: 0.9)
     case .changed:
 
-      let transition = recognizer.translation(in: bottomView.cardViewController.handleArea!)
+      let transition = recognizer.translation(in: bottomView.cardViewController.handleArea)
       var fractionComplete = transition.y / bottomView.cardHeight
       fractionComplete = bottomView.cardViewController.cardVisible ? fractionComplete : -fractionComplete
 
