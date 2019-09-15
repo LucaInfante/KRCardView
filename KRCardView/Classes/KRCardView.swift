@@ -40,6 +40,10 @@ extension KRCardView where Self: UIViewController {
       let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGesture(recognizer:)))
       let panGestureRecongnizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(recognizer:)))
 
+      cardViewController.handleArea = UIView(frame: CGRect(x: 10, y: 10, width: 100, height: 20))
+      cardViewController.handleArea.backgroundColor = UIColor.black
+      cardViewController.view.addSubview(cardViewController.handleArea)
+      
       cardViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
       cardViewController.handleArea.addGestureRecognizer(panGestureRecongnizer)
     }
