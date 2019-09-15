@@ -14,6 +14,7 @@ public enum CardState: Int {
 
 public protocol KRCardView {
   var cardViewController: CardViewController! { get set }
+  var cardHandle: UIView! { get set}
 
   var cardHandleAreaHeight: CGFloat { get }
   var cardHeight: CGFloat { get }
@@ -40,11 +41,7 @@ extension KRCardView where Self: UIViewController {
       let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGesture(recognizer:)))
       let panGestureRecongnizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(recognizer:)))
 
-      let handleArea = UIView(frame: CGRect(x: 10, y: 10, width: 100, height: 20))
-      cardViewController.handleArea = handleArea
-      cardViewController.handleArea!.backgroundColor = UIColor.black
-      cardViewController.view.addSubview(cardViewController.handleArea!)
-      
+      cardViewController.handleArea = self.cardHandle
       cardViewController.handleArea!.addGestureRecognizer(tapGestureRecognizer)
       cardViewController.handleArea!.addGestureRecognizer(panGestureRecongnizer)
     }
