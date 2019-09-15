@@ -22,7 +22,7 @@ public protocol KRCardView {
 
 extension KRCardView where Self: UIViewController {
 
-  public func addKRCardView(handle: Bool) {
+  public func addKRCardView() {
 
     // Visual Effect View
     cardViewController.visualEffectView.frame = self.view.frame
@@ -34,15 +34,6 @@ extension KRCardView where Self: UIViewController {
     self.view.addSubview(cardViewController.view)
 
     cardViewController.view.frame = CGRect(x: 0, y: self.view.frame.height - cardHandleAreaHeight, width: self.view.bounds.width, height: self.cardHeight)
-
-    if handle
-    {
-      let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGesture(recognizer:)))
-      let panGestureRecongnizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanGesture(recognizer:)))
-
-      cardViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
-      cardViewController.handleArea.addGestureRecognizer(panGestureRecongnizer)
-    }
     
     cardViewController.view.clipsToBounds = true
 
@@ -58,40 +49,6 @@ fileprivate extension UIViewController {
     let bottomView = self as! KRCardView
     return bottomView.cardViewController.cardVisible ? .collapsed : .expanded
   }
-
-  @objc func handleTapGesture(recognizer: UITapGestureRecognizer) {
-
-    guard recognizer.state == .ended else {
-      return
-    }
-
-    self.animationTransitionIfNeeded(state: nextState, duration: 0.9)
-  }
-
-  @objc func handlePanGesture(recognizer: UIPanGestureRecognizer) {
-
-    guard let bottomView = self as? KRCardView else {
-      return
-    }
-
-    switch recognizer.state {
-    case .began:
-      self.startInteractiveTransition(state: nextState, duration: 0.9)
-    case .changed:
-
-      let transition = recognizer.translation(in: bottomView.cardViewController.handleArea)
-      var fractionComplete = transition.y / bottomView.cardHeight
-      fractionComplete = bottomView.cardViewController.cardVisible ? fractionComplete : -fractionComplete
-
-      self.updateInteractiveTransition(fractionCompleted: fractionComplete)
-    case .ended:
-      continueInteractiveTransition()
-    default:
-      break
-    }
-
-  }
-
 
   func animationTransitionIfNeeded(state: CardState, duration: TimeInterval) {
 
