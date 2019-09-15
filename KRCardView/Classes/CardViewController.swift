@@ -10,7 +10,7 @@ import UIKit
 
 open class CardViewController: UIViewController {
 
-  var handleArea: UIView?
+  var handleArea = UIView(frame: .zero)
 
   var visualEffectView = UIVisualEffectView()
 
@@ -20,8 +20,8 @@ open class CardViewController: UIViewController {
   
   override open func viewDidLoad() {
         super.viewDidLoad()
-
+        self.handleArea = UIView(frame: CGRect(x: 10, y: 10, width: 100, height: 20))
+        self.handleArea.backgroundColor = UIColor.black
+        self.view.addSubview(self.handleArea)
     }
-
-
 }
