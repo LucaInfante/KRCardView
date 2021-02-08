@@ -1,3 +1,5 @@
+# Forked for personal interventions and not "worthy" of pull request or original git was abandoned.
+
 # KRCardView
 
 [![CI Status](https://img.shields.io/travis/kamalraj.venkatesan/KRCardView.svg?style=flat)](https://travis-ci.org/kamalraj.venkatesan/KRCardView)
